@@ -1,0 +1,47 @@
+{
+  "name": "generator-mobile-app",
+  "version": "0.0.1",
+  "description": "A Yeoman generator for mobile web apps using Browserify and Cordova",
+  "keywords": [
+    "yeoman-generator",
+    "browserify",
+    "cordova",
+    "mobile"
+  ],
+  "homepage": "https://github.com/peutetre/generator-mobile-app",
+  "bugs": "https://github.com/peutetre/generator-mobile-app/issues",
+  "author": {
+    "name": "Paul Panserrieu",
+    "email": "paul@42loops.com",
+    "url": "http://42loops.com"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/peutetre/generator-mobile-app.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.13.0",
+    "github": "~0.1.8",
+    "q":"0.9.7",
+    "cordova": "git+https://github.com/peutetre/cordova-cli.git#3.1.0-0.2.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0-rc.1"
+  },
+  "engines": {
+    "node": ">=0.10.20",
+    "npm": ">=1.3.11"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}

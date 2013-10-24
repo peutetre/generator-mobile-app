@@ -1,0 +1,33 @@
+{
+  "name": "<%= _.slugify(appName) %>",
+  "version": "0.0.1",
+  "description":"<%= appDescription %>",
+  "keywords": [ ],
+<% if(githubUser) { %>
+  "author": {
+    "name": "<%= realname %>",
+    "email": "<%= email %>",
+    "url": "<%= githubUrl %>"
+  },
+  "homepage": "<%= githubUrl %>/<%= _.slugify(appName) %>",
+  "bugs": "<%= githubUrl %>/<%= _.slugify(appName) %>/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/<%= githubUser %>/<%= _.slugify(appName) %>.git"
+  },
+<% } %>
+  "scripts": {
+    "build": "./node_modules/browserify/bin/cmd.js ./app/index.js -o ./www/main.js --debug"
+  },
+  "dependencies": {
+    <% dependencies.forEach(function (dep, idx) { %>"<%= (dep.trim()) %>" : "*"<%= (idx === dependencies.length-1 ? '' : ',\n   ') %> <% }) %>
+  },
+  "devDependencies": {
+    "browserify": "2.29.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
