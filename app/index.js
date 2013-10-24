@@ -69,6 +69,21 @@ ModuleGenerator.prototype.askFor = function askFor() {
     name:'dependencies',
     message:'Do you want to add dependencies? (sepatate modules with comma)',
     default: ""
+  },
+  {
+    type:'checkbox',
+    name:'targets',
+    choices:[{
+        name:'ios',
+        value:'ios'
+    },{
+        name:'Android',
+        value:'android'
+    }],
+    message:'Which targets do you want to support ?',
+    validate: function (input) {
+        return input instanceof Array && input.length > 0 ? true : "One minimum target is required";
+    }
   }];
 
   this.prompt(prompts, function (props) {
@@ -80,6 +95,7 @@ ModuleGenerator.prototype.askFor = function askFor() {
         .filter(function (dep) {
             return dep.length > 0;
         });
+    this.targets = props.targets;
     cb();
   }.bind(this));
 };
@@ -95,6 +111,24 @@ ModuleGenerator.prototype.userInfo = function userInfo() {
   }.bind(this));
 };
 
+ModuleGenerator.prototype.cordova = function app() {
+  var cb = this.async();
+
+  cordova.create('.', this.appId, this.appName, function () {
+    this.log.write().ok('Raw app created');
+    cb();
+  }.bind(this));
+};
+
+ModuleGenerator.prototype.target = function app() {
+  var cb = this.async();
+
+  cordova.platform('add', this.targets, function () {
+    this.log.ok('Targets added: ' + this.targets.concat()).write();
+    cb();
+  }.bind(this));
+};
+
 ModuleGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.template('app/_index.js', 'app/index.js');
@@ -102,14 +136,4 @@ ModuleGenerator.prototype.app = function app() {
   this.template('_README.md', 'README.md');
   this.template('_LICENSE', 'LICENSE');
   this.copy('gitignore', '.gitignore');
-};
-
-ModuleGenerator.prototype.cordova = function app() {
-  var cb = this.async();
-
-  this.mkdir('cordova');
-  cordova.create('cordova', this.appId, this.appName, function () {
-    this.log.write().ok('Raw app created');
-    cb();
-  }.bind(this));
 };
