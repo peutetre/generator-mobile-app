@@ -53,7 +53,7 @@ ModuleGenerator.prototype.askFor = function askFor() {
   },{
     type:'input',
     name:'appId',
-    message:'What is the ID of the mobile App (reverse-domain-style package name, like com.foo.myapp)?',
+    message:'What is the ID of the mobile App\n (reverse-domain-style package name, like com.foo.myapp)?',
     validate: function (input) {
         return input.match(/(^[a-z0-9]+\.[a-z0-9]+\.[a-z0-9]+$)/g) ? true : "Need an Id like com.foo.myapp!";
     }
@@ -67,7 +67,7 @@ ModuleGenerator.prototype.askFor = function askFor() {
   {
     type:'input',
     name:'dependencies',
-    message:'Do you want to add dependencies? (sepatate modules with comma)',
+    message:'Do you want to add dependencies? (sepatate modules with comma)\n Q and Qstart are the default dependencies. ',
     default: ""
   },
   {
@@ -76,10 +76,10 @@ ModuleGenerator.prototype.askFor = function askFor() {
     choices:[{
         name:'ios',
         value:'ios'
-    },{
+    }/*,{ // only ios for now
         name:'Android',
         value:'android'
-    }],
+    }*/],
     message:'Which targets do you want to support ?',
     validate: function (input) {
         return input instanceof Array && input.length > 0 ? true : "One minimum target is required";
@@ -154,7 +154,11 @@ ModuleGenerator.prototype.askFor = function askFor() {
     this.dependencies = props.dependencies.split(',')
         .filter(function (dep) {
             return dep.length > 0;
+        })
+        .map(function (dep) {
+            return dep.trim();
         });
+    this.dependencies = ['q', 'qstart'].concat(this.dependencies);
     this.targets = props.targets;
     this.plugins = props.plugins;
     cb();
@@ -215,4 +219,11 @@ ModuleGenerator.prototype.app = function app() {
   this.template('_README.md', 'README.md');
   this.template('_LICENSE', 'LICENSE');
   this.copy('gitignore', '.gitignore');
+};
+
+ModuleGenerator.prototype.www = function app() {
+  this.template('www/_index.html', 'www/index.html');
+  this.mkdir('fonts');
+  this.mkdir('images');
+  this.mkdir('styles');
 };

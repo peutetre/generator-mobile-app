@@ -7,7 +7,7 @@ var Q = require('q'),
     app = { };
 
 app.init = function () {
-    console.log('App init...');
+    console.log('App <%= appName %> init...');
 };
 
 Qstart.then(app.init);

@@ -17,7 +17,8 @@
   },
 <% } %>
   "scripts": {
-    "build": "./node_modules/browserify/bin/cmd.js ./app/index.js -o ./www/main.js --debug"
+    "build": "./node_modules/browserify/bin/cmd.js ./app/index.js -o ./www/main.js --debug",
+    "prod": "./node_modules/browserify/bin/cmd.js ./app/index.js -o ./www/main.js"
   },
   "dependencies": {
     <% dependencies.forEach(function (dep, idx) { %>"<%= (dep.trim()) %>" : "*"<%= (idx === dependencies.length-1 ? '' : ',\n   ') %> <% }) %>
