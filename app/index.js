@@ -158,7 +158,7 @@ ModuleGenerator.prototype.askFor = function askFor() {
         .map(function (dep) {
             return dep.trim();
         });
-    this.dependencies = ['q', 'qstart'].concat(this.dependencies);
+    this.dependencies = ['stylus', 'q', 'qstart'].concat(this.dependencies);
     this.targets = props.targets;
     this.plugins = props.plugins;
     cb();
