@@ -55,7 +55,7 @@ ModuleGenerator.prototype.askFor = function askFor() {
     name:'appId',
     message:'What is the ID of the mobile App\n (reverse-domain-style package name, like com.foo.myapp)?',
     validate: function (input) {
-        return input.match(/(^[a-z0-9]+\.[a-z0-9]+\.[a-z0-9]+$)/g) ? true : "Need an Id like com.foo.myapp!";
+        return input.match(/(^[a-z]{1}[a-z0-9]+\.[a-z]{1}[a-z0-9]+\.[a-z]{1}[a-z0-9]+$)/g) ? true : "Need an Id like com.foo.myapp!";
     }
   },
   {
@@ -76,10 +76,10 @@ ModuleGenerator.prototype.askFor = function askFor() {
     choices:[{
         name:'ios',
         value:'ios'
-    }/*,{ // only ios for now
+    },{
         name:'Android',
         value:'android'
-    }*/],
+    }],
     message:'Which targets do you want to support ?',
     validate: function (input) {
         return input instanceof Array && input.length > 0 ? true : "One minimum target is required";
