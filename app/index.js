@@ -223,7 +223,9 @@ ModuleGenerator.prototype.app = function app() {
 
 ModuleGenerator.prototype.www = function app() {
   this.template('www/_index.html', 'www/index.html');
+  this.mkdir('www/css')
   this.mkdir('fonts');
   this.mkdir('images');
-  this.mkdir('styles');
+  this.mkdir('style');
+  this.copy('style/styles.styl', 'style/styles.styl');
 };
