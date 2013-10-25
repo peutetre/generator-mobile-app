@@ -173,9 +173,18 @@ ModuleGenerator.prototype.userInfo = function userInfo() {
 };
 
 ModuleGenerator.prototype.cordova = function app() {
-  var cb = this.async();
+  var cb = this.async(),
+      cfg = {
+        lib : {
+            www : {
+                uri : 'https://github.com/peutetre/base-app/archive/v3.1.0.tar.gz',
+                id  : 'base-app',
+                version : '3.1.0'
+            }
+        }
+      };
 
-  cordova.create('.', this.appId, this.appName, function () {
+  cordova.create('.', this.appId, this.appName, cfg, function () {
     this.log.write().ok('Raw app created');
     cb();
   }.bind(this));
