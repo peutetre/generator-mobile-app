@@ -1,6 +1,6 @@
 # generator-mobile-app [![Build Status](https://secure.travis-ci.org/peutetre/generator-mobile-app.png?branch=master)](https://travis-ci.org/peutetre/generator-mobile-app)
 
-A [Yeoman](http://yeoman.io) generator for mobile web apps using  __[Browserify](http://browserify.org)__ and Cordova.
+A [Yeoman](http://yeoman.io) generator for mobile web apps using  __[Browserify](http://browserify.org)__ and __[Cordova](http://cordova.apache.org/)__.
 
 ## Getting Started
 
@@ -28,13 +28,27 @@ $ yo mobile-app
 
 ## Generator results
 
-### Usage
+Produce a Cordova app and the following additional files and folders:
 
-### Tests
+```
+myapp
+|-- .gitignore
+|-- LICENSE
+|-- README.md
+|-- app
+|   `-- index.js
+|-- fonts
+|-- images
+|-- package.json
+|-- style
+|   `-- styles.styl
+`-- www
+    `-- index.html
+```
 
 ## ChangeLog
 
-#### v0.0.1 2013-XX-XX
+#### v0.0.1 2013-10-25
 
 * minimal release
 
