@@ -25,6 +25,10 @@
   "devDependencies": {
     "browserify": "2.29.1"
   },
+  "generator": {
+    "name" : "<%= pkg.name %>",
+    "version" : "<%= pkg.version %>"
+  },
   "licenses": [
     {
       "type": "MIT"
