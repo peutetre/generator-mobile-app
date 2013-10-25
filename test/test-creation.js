@@ -20,18 +20,26 @@ describe('mobile-app generator', function () {
   });
 
   it('creates expected files', function (done) {
+    this.timeout(60000);
     var expected = [
       'package.json',
       'app/index.js',
-      'README.md'
+      'README.md',
+      '.gitignore',
+      'style/styles.styl',
+      'www/index.html',
+      'www/config.xml',
+      'platforms'
     ];
 
     helpers.mockPrompt(this.app, {
       'githubUser': 'peutetre',
       'appName': 'test-app',
-      'appId': 'com.42loops.test',
+      'appId': 'com.loops.test',
       'appDescription': 'This is a testing app',
-      'dependencies': 'q, zanimo'
+      'dependencies': 'q, zanimo',
+      'targets': ['ios', 'android'],
+      'plugins': []
     });
 
     this.app.run({}, function () {
