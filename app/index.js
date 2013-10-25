@@ -84,6 +84,66 @@ ModuleGenerator.prototype.askFor = function askFor() {
     validate: function (input) {
         return input instanceof Array && input.length > 0 ? true : "One minimum target is required";
     }
+  },
+  {
+    type:'checkbox',
+    name:'plugins',
+    choices:[{
+        name:'Battery Status',
+        value:'org.apache.cordova.battery-status'
+    },{
+        name:'Camera',
+        value:'org.apache.cordova.camera'
+    },{
+        name:'Console',
+        value:'org.apache.cordova.console'
+    },{
+        name:'Contacts',
+        value:'org.apache.cordova.contacts'
+    },{
+        name:'Device',
+        value:'org.apache.cordova.device'
+    },{
+        name:'Device Motion',
+        value:'org.apache.cordova.device-motion'
+    },{
+        name:'Device Orientation',
+        value:'org.apache.cordova.device-orientation'
+    },{
+        name:'Dialogs',
+        value:'org.apache.cordova.dialogs'
+    },{
+        name:'File',
+        value:'org.apache.cordova.file'
+    },{
+        name:'File Transfer',
+        value:'org.apache.cordova.file-transfer'
+    },{
+        name:'Geolocation',
+        value:'org.apache.cordova.geolocation'
+    },{
+        name:'Globalization',
+        value:'org.apache.cordova.globalization'
+    },{
+        name:'In App Browser',
+        value:'org.apache.cordova.inappbrowser'
+    },{
+        name:'Media',
+        value:'org.apache.cordova.media'
+    },{
+        name:'Media Capture',
+        value:'org.apache.cordova.media-capture'
+    },{
+        name:'Network Information',
+        value:'org.apache.cordova.network-information'
+    },{
+        name:'Splashscreen',
+        value:'org.apache.cordova.splashscreen'
+    },{
+        name:'Vibration',
+        value:'org.apache.cordova.vibration'
+    }],
+    message:'With which Cordova official plugins to you want to start?'
   }];
 
   this.prompt(prompts, function (props) {
@@ -96,6 +156,7 @@ ModuleGenerator.prototype.askFor = function askFor() {
             return dep.length > 0;
         });
     this.targets = props.targets;
+    this.plugins = props.plugins;
     cb();
   }.bind(this));
 };
@@ -124,7 +185,16 @@ ModuleGenerator.prototype.target = function app() {
   var cb = this.async();
 
   cordova.platform('add', this.targets, function () {
-    this.log.ok('Targets added: ' + this.targets.concat()).write();
+    this.log.ok('Targets added: ' + this.targets.join(', ')).write();
+    cb();
+  }.bind(this));
+};
+
+ModuleGenerator.prototype.cordovaplugins = function app() {
+  var cb = this.async();
+
+  cordova.plugins('add', this.plugins, function () {
+    this.log.ok('Plugins added: ' + this.plugins.join(', ')).write();
     cb();
   }.bind(this));
 };
