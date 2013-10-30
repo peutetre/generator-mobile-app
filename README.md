@@ -48,6 +48,10 @@ myapp
 
 ## ChangeLog
 
+#### v0.0.2 2013-10-30
+
+* upgrade `cordova` to `3.1.0-0.2.0`
+
 #### v0.0.1 2013-10-25
 
 * minimal release
