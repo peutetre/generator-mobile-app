@@ -1,0 +1,55 @@
+[{
+    "name":"Battery Status",
+    "value":"org.apache.cordova.battery-status"
+},{
+    "name":"Camera",
+    "value":"org.apache.cordova.camera"
+},{
+    "name":"Console",
+    "value":"org.apache.cordova.console"
+},{
+    "name":"Contacts",
+    "value":"org.apache.cordova.contacts"
+},{
+    "name":"Device",
+    "value":"org.apache.cordova.device"
+},{
+    "name":"Device Motion",
+    "value":"org.apache.cordova.device-motion"
+},{
+    "name":"Device Orientation",
+    "value":"org.apache.cordova.device-orientation"
+},{
+    "name":"Dialogs",
+    "value":"org.apache.cordova.dialogs"
+},{
+    "name":"File",
+    "value":"org.apache.cordova.file"
+},{
+    "name":"File Transfer",
+    "value":"org.apache.cordova.file-transfer"
+},{
+    "name":"Geolocation",
+    "value":"org.apache.cordova.geolocation"
+},{
+    "name":"Globalization",
+    "value":"org.apache.cordova.globalization"
+},{
+    "name":"In App Browser",
+    "value":"org.apache.cordova.inappbrowser"
+},{
+    "name":"Media",
+    "value":"org.apache.cordova.media"
+},{
+    "name":"Media Capture",
+    "value":"org.apache.cordova.media-capture"
+},{
+    "name":"Network Information",
+    "value":"org.apache.cordova.network-information"
+},{
+    "name":"Splashscreen",
+    "value":"org.apache.cordova.splashscreen"
+},{
+    "name":"Vibration",
+    "value":"org.apache.cordova.vibration"
+}]

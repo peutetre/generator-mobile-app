@@ -12,38 +12,12 @@ Install Yeoman and the generator-mobile-app
 $ npm install -g yo generator-mobile-app
 ```
 
-You need to install my cordova-cli fork (waiting for the new release)
-
-```
-$ npm install -g git+https://github.com/peutetre/cordova-cli.git#3.1.0-0.3.0
-```
-
 ### Usage
 
 Launch the generator:
 
 ```
 $ yo mobile-app
-```
-
-## Generator results
-
-Produce a Cordova app and the following additional files and folders:
-
-```
-myapp
-|-- .gitignore
-|-- LICENSE
-|-- README.md
-|-- app
-|   `-- index.js
-|-- fonts
-|-- images
-|-- package.json
-|-- style
-|   `-- styles.styl
-`-- www
-    `-- index.html
 ```
 
 ## ChangeLog

@@ -1,6 +1,6 @@
 {
   "name": "<%= _.slugify(appName) %>",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description":"<%= appDescription %>",
   "keywords": [ ],
 <% if(githubUser) { %>
@@ -16,23 +16,7 @@
     "url": "git://github.com/<%= githubUser %>/<%= _.slugify(appName) %>.git"
   },
 <% } %>
-  "scripts": {
-    "build": "cat style/styles.styl | ./node_modules/stylus/bin/stylus  > ./www/css/main.css; ./node_modules/browserify/bin/cmd.js ./app/index.js -o ./www/main.js --debug",
-    "prod": "cat style/styles.styl | ./node_modules/stylus/bin/stylus  > ./www/css/main.css; ./node_modules/browserify/bin/cmd.js ./app/index.js -o ./www/main.js"
-  },
   "dependencies": {
-    <% dependencies.forEach(function (dep, idx) { %>"<%= (dep.trim()) %>" : "*"<%= (idx === dependencies.length-1 ? '' : ',\n   ') %> <% }) %>
-  },
-  "devDependencies": {
-    "browserify": "2.29.1"
-  },
-  "generator": {
-    "name" : "<%= pkg.name %>",
-    "version" : "<%= pkg.version %>"
-  },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+    "cordova" : "3.1.0-0.2.0"
+  }
 }

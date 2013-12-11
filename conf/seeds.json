@@ -1,0 +1,10 @@
+[{
+    "id" : "empty-app",
+    "version" : "0.0.0",
+    "uri" : "https://github.com/peutetre/empty-app/archive/v0.0.0.tar.gz"
+},
+{
+    "id" : "base-app",
+    "version" : "3.1.0",
+    "uri" : "https://github.com/peutetre/base-app/archive/v3.1.0.tar.gz"
+}]
