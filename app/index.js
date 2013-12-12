@@ -22,7 +22,7 @@ var githubUserInfo = function (name, cb) {
   });
 };
 
-var ModuleGenerator = module.exports = function ModuleGenerator(args, options, config) {
+var MobileAppGenerator = module.exports = function MobileAppGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
@@ -36,9 +36,9 @@ var ModuleGenerator = module.exports = function ModuleGenerator(args, options, c
   this.seeds = JSON.parse(this.readFileAsString(path.join(__dirname, '../conf/seeds.json')));
 };
 
-util.inherits(ModuleGenerator, yeoman.generators.Base);
+util.inherits(MobileAppGenerator, yeoman.generators.Base);
 
-ModuleGenerator.prototype.askFor = function askFor() {
+MobileAppGenerator.prototype.askUserFor = function askFor() {
   var cb = this.async();
 
   var prompts = [{
@@ -103,12 +103,19 @@ ModuleGenerator.prototype.askFor = function askFor() {
     this.seed = props.seed;
     cb();
   }.bind(this));
+
 };
 
-ModuleGenerator.prototype.userInfo = function userInfo() {
+MobileAppGenerator.prototype.userInfo = function userInfo() {
   var done = this.async();
 
-  githubUserInfo(this.githubUser, function (res) {
+  githubUserInfo(this.githubUser, function (res, err) {
+    if (err) {
+        this.realname = null;
+        this.email = null;
+        this.githubUrl = null;
+        done();
+    }
     this.realname = res.name;
     this.email = res.email;
     this.githubUrl = res.html_url;
@@ -116,7 +123,7 @@ ModuleGenerator.prototype.userInfo = function userInfo() {
   }.bind(this));
 };
 
-ModuleGenerator.prototype.cordova = function app() {
+MobileAppGenerator.prototype.initCordova = function initCordova() {
   var cb = this.async(),
       self = this,
       cfg = { lib : { www : this.seeds.filter(function (seed) {
@@ -129,7 +136,7 @@ ModuleGenerator.prototype.cordova = function app() {
   }.bind(this));
 };
 
-ModuleGenerator.prototype.target = function app() {
+MobileAppGenerator.prototype.target = function target() {
   var cb = this.async();
 
   cordova.platform('add', this.targets, function () {
@@ -138,17 +145,31 @@ ModuleGenerator.prototype.target = function app() {
   }.bind(this));
 };
 
-ModuleGenerator.prototype.cordovaplugins = function app() {
+MobileAppGenerator.prototype.cordovaplugins = function cordovaplugins() {
   var cb = this.async();
 
   cordova.plugins('add', this.plugins, function () {
-    this.log.ok('Plugins added: ' + this.plugins.join(', ')).write();
+    this.plugins.forEach(function (plugin) {
+        this.log.ok('Added plugin: ' + plugin).write();
+    }.bind(this));
     cb();
   }.bind(this));
 };
 
-ModuleGenerator.prototype.app = function app() {
+/*MobileAppGenerator.prototype.seedAskUserFor = function seedAskUserFor() {
+    this.log.ok('seed should ask user for complementary informations').write();
+};*/
+
+MobileAppGenerator.prototype.app = function app() {
   this.template('_package.json', 'package.json');
   this.template('_README.md', 'README.md');
   this.copy('gitignore', '.gitignore');
+};
+
+MobileAppGenerator.prototype.oops = function oops() {
+ var cb = this.async();
+  yeoman('default-seed').register('generator-default-seed', 'default-seed').run(function (err) {
+    console.log(err, 'OOOOOPS');
+    cb();
+  });
 };
