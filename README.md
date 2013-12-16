@@ -1,32 +1,54 @@
-# generator-mobile-app [![Build Status](https://secure.travis-ci.org/peutetre/generator-mobile-app.png?branch=master)](https://travis-ci.org/peutetre/generator-mobile-app)
+# generator-mobile-app [![Build Status](https://secure.travis-ci.org/peutetre/generator-mobile-app.png?branch=master)](https://travis-ci.org/peutetre/generator-mobile-app) [![experimental](http://hughsk.github.io/stability-badges/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
 
-A [Yeoman](http://yeoman.io) generator for mobile web apps using  __[Browserify](http://browserify.org)__ and __[Cordova](http://cordova.apache.org/)__.
+A [Yeoman](http://yeoman.io) generator for mobile web apps using __[Cordova](http://cordova.apache.org/)__.
 
 ## Getting Started
 
 ### Install
 
-Install Yeoman and the generator-mobile-app
+Install Yeoman, the generator-mobile-app and a default project seed
 
 ```
-$ npm install -g yo generator-mobile-app
+$ npm install -g yo generator-mobile-app default-seed
 ```
 
 ### Usage
 
-Launch the generator:
+Launch the generator (interactive mode):
 
 ```
 $ yo mobile-app
 ```
 
+Get the version of the mobile-app generator
+
+```
+$ yo mobile-app -gv
+```
+
+Get the available project seeds
+
+```
+$ yo mobile-app -l
+```
+
+Get some help
+
+```
+$ yo mobile-app -h
+```
+
 ## ChangeLog
 
-#### v0.0.2 2013-10-30
+### v0.1 ???
+
+* working version (ios, android)
+
+#### v0.0.2 2013-10-30 (experimental)
 
 * upgrade `cordova` to `3.1.0-0.2.0`
 
-#### v0.0.1 2013-10-25
+#### v0.0.1 2013-10-25 (experimental)
 
 * minimal release
 
