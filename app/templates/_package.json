@@ -17,6 +17,6 @@
   },
 <% } %>
   "dependencies": {
-    "cordova" : "<%= this.pkg.dependencies.cordova %>"
+    "cordova" : "<%= pkg.dependencies.cordova %>"
   }
 }
