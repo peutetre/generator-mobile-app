@@ -44,7 +44,7 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
 
     if(options.l || options.list) {
         this.seeds.forEach(function (seed) {
-            console.log(chalk.blue(seed.id) + " v" + seed.version + " ➜ " + seed.uri);
+            console.log(chalk.blue(seed.name));
         }, this);
         process.exit(0);
     }
@@ -89,6 +89,14 @@ MobileAppGenerator.prototype.askUserFor = function askFor() {
         this.targets = props.targets;
         this.plugins = props.plugins;
         this.seed = props.seed;
+        // check if seed installed
+        try {
+            require(this.seed);
+        } catch(err) {
+            console.log(err.toString());
+            console.log(chalk.red('you may need to install it: npm install -g ' + this.seed));
+            process.exit(1);
+        }
         done();
     }.bind(this));
 };
@@ -147,11 +155,16 @@ MobileAppGenerator.prototype.cordovaplugins = function cordovaplugins() {
 
 MobileAppGenerator.prototype.execSeedGenerator = function oops() {
     var cb = this.async();
-    yeoman('default-seed', {
+    yeoman(this.seed, {
         userSettings : {
-            "appName" : this.appName
+            appName : this.appName,
+            githubUser : this.githubUser,
+            appId : this.appId,
+            appDescription : this.appDescription,
+            targets : this.targets,
+            plugins : this.plugins
         }
-    }).register('generator-default-seed', 'default-seed').run(function (err) {
+    }).register(this.seed, this.seed).run(function (err) {
         if (err) this.log.error(err).write();
         cb();
     });

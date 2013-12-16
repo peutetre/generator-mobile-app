@@ -38,6 +38,11 @@ Get some help
 $ yo mobile-app -h
 ```
 
+## Seeds
+
+* [WIP] __[default-seed](http://github.com/peutetre/default-seed)__
+* [TODO] __[browserify-seed](http://github.com/peutetre/browserify-seed)__
+
 ## ChangeLog
 
 ### v0.1 ???

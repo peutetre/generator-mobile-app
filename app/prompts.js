@@ -52,7 +52,7 @@ module.exports = function () {
         {
             type:'list',
             name:'seed',
-            choices: this.seeds.map(function (seed) { return seed.id ; }),
+            choices: this.seeds.map(function (seed) { return seed.name ; }),
             message:'With which project seed do you want to start with?'
         }
     ];
