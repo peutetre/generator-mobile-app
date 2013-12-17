@@ -1,4 +1,6 @@
 [
-    { "name" : "generator-default-seed" },
-    { "name" : "generator-browserify-seed" }
+    {
+        "name" : "generator-default-seed",
+        "path" : "../node_modules/generator-default-seed"
+    }
 ]

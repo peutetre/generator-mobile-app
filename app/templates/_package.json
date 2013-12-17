@@ -2,8 +2,7 @@
   "name": "<%= _.slugify(appName) %>",
   "version": "0.0.0",
   "description":"<%= appDescription %>",
-  "keywords": [ ],
-<% if(githubUser) { %>
+  "keywords": [ ],<% if(githubUser) { %>
   "author": {
     "name": "<%= realname %>",
     "email": "<%= email %>",
@@ -14,8 +13,11 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/<%= githubUser %>/<%= _.slugify(appName) %>.git"
+  },<% } %>
+  "scripts": {
+    "dev" : "echo TODO",
+    "build" : "echo TODO"
   },
-<% } %>
   "dependencies": {
     "cordova" : "<%= pkg.dependencies.cordova %>"
   }

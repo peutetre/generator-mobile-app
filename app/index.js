@@ -4,6 +4,7 @@ var util = require('util'),
     path = require('path'),
     fs = require('fs'),
     yeoman = require('yeoman-generator'),
+    merge = require('recursive-merge'),
     GitHubApi = require('github'),
     cordova = require('cordova'),
     chalk = require('chalk'),
@@ -21,10 +22,25 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
     this.seeds = [];
     this.pkg = JSON.parse(this.readFileAsString(packagePath));
 
-    if(fs.existsSync(userSeedPath))
+    if(fs.existsSync(userSeedPath)) {
         this.seeds = JSON.parse(this.readFileAsString(userSeedPath));
+        this.seeds = this.seeds.map(function (seed) {
+            return {
+                name : seed.name,
+                path : path.resolve(process.env.HOME, seed.path)
+            };
+        });
+    }
 
-    this.seeds = this.seeds.concat(JSON.parse(this.readFileAsString(generatorSeedPath)));
+    var defaultSeeds = JSON.parse(this.readFileAsString(generatorSeedPath))
+            .map(function (seed) {
+                return {
+                    name : seed.name,
+                    path : path.resolve(__dirname, seed.path)
+                };
+            });
+
+    this.seeds = this.seeds.concat(defaultSeeds);
 
     this.option('generator-version', {
         alias: 'gv',
@@ -44,7 +60,7 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
 
     if(options.l || options.list) {
         this.seeds.forEach(function (seed) {
-            console.log(chalk.blue(seed.name));
+            console.log(chalk.blue(seed.name) + ": " + seed.path);
         }, this);
         process.exit(0);
     }
@@ -88,10 +104,11 @@ MobileAppGenerator.prototype.askUserFor = function askFor() {
         this.appDescription = props.appDescription;
         this.targets = props.targets;
         this.plugins = props.plugins;
-        this.seed = props.seed;
-        // check if seed installed
+        this.seed = this.seeds.filter(function (seed) {
+            return seed.name === props.seed;
+        })[0];
         try {
-            require(this.seed);
+            require(this.seed.path);
         } catch(err) {
             console.log(err.toString());
             console.log(chalk.red('you may need to install it: npm install -g ' + this.seed));
@@ -155,7 +172,7 @@ MobileAppGenerator.prototype.cordovaplugins = function cordovaplugins() {
 
 MobileAppGenerator.prototype.execSeedGenerator = function oops() {
     var cb = this.async();
-    yeoman(this.seed, {
+    yeoman(this.seed.name, {
         userSettings : {
             appName : this.appName,
             githubUser : this.githubUser,
@@ -164,14 +181,40 @@ MobileAppGenerator.prototype.execSeedGenerator = function oops() {
             targets : this.targets,
             plugins : this.plugins
         }
-    }).register(this.seed, this.seed).run(function (err) {
+    }).register(this.seed.path, this.seed.name).run(function (err) {
         if (err) this.log.error(err).write();
         cb();
-    });
+    }.bind(this));
 };
 
 MobileAppGenerator.prototype.app = function app() {
-    this.template('_package.json', 'package.json');
     this.template('_README.md', 'README.md');
     this.copy('gitignore', '.gitignore');
+};
+
+MobileAppGenerator.prototype.cpPackage = function cpPackage() {
+    var done = this.async();
+    fs.exists(path.join(process.cwd(), 'package.json'), function (exists) {
+        if (exists) this.template('_package.json', '_package.json');
+        else this.template('_package.json', 'package.json');
+        done();
+    }.bind(this));
+};
+
+MobileAppGenerator.prototype.mergePackageDotJson = function mergePackageDotJson() {
+    var done = this.async();
+    fs.exists(path.join(process.cwd(), '_package.json'), function (exist) {
+        if (exist) {
+            var f1 = JSON.parse(this.readFileAsString(path.join(process.cwd(), 'package.json')));
+            var f2 = JSON.parse(this.readFileAsString(path.join(process.cwd(), '_package.json')));
+            var m = merge(f1, f2);
+            fs.writeFile(path.join(process.cwd(), 'package.json'), JSON.stringify(m, null, 4), function () {
+                fs.unlink(path.join(process.cwd(), '_package.json'));
+                done();
+            });
+        }
+        else {
+            done();
+        }
+    }.bind(this));
 };
