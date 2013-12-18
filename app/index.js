@@ -192,29 +192,24 @@ MobileAppGenerator.prototype.app = function app() {
     this.copy('gitignore', '.gitignore');
 };
 
-MobileAppGenerator.prototype.cpPackage = function cpPackage() {
+MobileAppGenerator.prototype.generateMainPackageDotJSON = function cpPackage() {
     var done = this.async();
     fs.exists(path.join(process.cwd(), 'package.json'), function (exists) {
-        if (exists) this.template('_package.json', '_package.json');
-        else this.template('_package.json', 'package.json');
-        done();
-    }.bind(this));
-};
-
-MobileAppGenerator.prototype.mergePackageDotJson = function mergePackageDotJson() {
-    var done = this.async();
-    fs.exists(path.join(process.cwd(), '_package.json'), function (exist) {
-        if (exist) {
-            var f1 = JSON.parse(this.readFileAsString(path.join(process.cwd(), 'package.json')));
-            var f2 = JSON.parse(this.readFileAsString(path.join(process.cwd(), '_package.json')));
-            var m = merge(f1, f2);
-            fs.writeFile(path.join(process.cwd(), 'package.json'), JSON.stringify(m, null, 4), function () {
-                fs.unlink(path.join(process.cwd(), '_package.json'));
-                done();
-            });
+        if (exists) {
+            // need to merge 2 package.json files
+            var jsonSeedPath = path.join(process.cwd(), 'package.json'),
+                jsonGeneratorPath = path.join(__dirname, '/templates/_package.json'),
+                jsonFromSeed = JSON.parse(this.readFileAsString(jsonSeedPath)),
+                jsonFromGenerator = JSON.parse(this.engine(this.read(jsonGeneratorPath, 'utf8'), this)),
+                mergedStr = JSON.stringify(merge(jsonFromGenerator, jsonFromSeed), null, 4);
+                fs.writeFile(path.join(process.cwd(), 'package.json'), mergedStr, function () {
+                    this.log.ok('merged package.json');
+                    done();
+                }.bind(this));
         }
         else {
-            done();
+            this.template('_package.json', 'package.json');
         }
+        done();
     }.bind(this));
 };
