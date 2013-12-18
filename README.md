@@ -6,10 +6,8 @@ A __[Yeoman](http://yeoman.io)__ generator for mobile web apps using __[Cordova]
 
 ### Install
 
-Install Yeoman, the generator-mobile-app and a default project seed
-
 ```
-$ npm install -g yo generator-mobile-app default-seed
+$ npm install -g yo generator-mobile-app
 ```
 
 ### Usage
@@ -40,8 +38,22 @@ $ yo mobile-app -h
 
 ## Seeds
 
-* [WIP] __[default-seed](http://github.com/peutetre/default-seed)__
-* [TODO] __[browserify-seed](http://github.com/peutetre/browserify-seed)__
+* __[default-seed](http://github.com/peutetre/default-seed)__
+* __[browserify-seed](http://github.com/peutetre/browserify-seed)__
+
+## Add more seeds
+
+__generator-mobile-app__ reads a .seeds.json file if available in your $HOME.
+
+.seeds.json example:
+```
+[
+    {
+        "name" : "generator-browserify-seed",
+        "path" : "./code/generators/browserify-seed"
+    }
+]
+```
 
 ## ChangeLog
 
