@@ -146,8 +146,10 @@ MobileAppGenerator.prototype.askUserFor = function askFor() {
 
 MobileAppGenerator.prototype.userInfo = function userInfo() {
     var done = this.async();
-
-    if (this.githubUser === null) done();
+    if (!this.githubUser) {
+        done();
+        return;
+    }
 
     githubUserInfo(this.githubUser, function (res, err) {
         if (err) {
@@ -172,7 +174,12 @@ MobileAppGenerator.prototype.initCordova = function initCordova() {
             uri : path.join(__dirname, '../conf/empty-www')
         } } };
 
-    cordova.create('.', this.appId, this.appName, cfg, function () {
+    cordova.create('.', this.appId, this.appName, cfg, function (err) {
+        if(err) {
+            console.log(chalk.red('Oops something went wrong...'));
+            console.log(err);
+            process.exit(1);
+        }
         this.log.write().ok('Raw app created');
         cb();
     }.bind(this));
@@ -181,7 +188,12 @@ MobileAppGenerator.prototype.initCordova = function initCordova() {
 MobileAppGenerator.prototype.target = function target() {
     var cb = this.async();
 
-    cordova.platform('add', this.targets, function () {
+    cordova.platform('add', this.targets, function (err) {
+        if(err) {
+            console.log(chalk.red('Oops something went wrong...'));
+            console.log(err);
+            process.exit(2);
+        }
         this.log.ok('Targets added: ' + this.targets.join(', ')).write();
         cb();
     }.bind(this));
@@ -190,7 +202,12 @@ MobileAppGenerator.prototype.target = function target() {
 MobileAppGenerator.prototype.cordovaplugins = function cordovaplugins() {
     var cb = this.async();
 
-    cordova.plugins('add', this.plugins, function () {
+    cordova.plugins('add', this.plugins, function (err) {
+        if(err) {
+            console.log(chalk.red('Oops something went wrong...'));
+            console.log(err);
+            process.exit(4);
+        }
         this.plugins.forEach(function (plugin) {
             this.log.ok('Added plugin: ' + plugin).write();
         }.bind(this));
