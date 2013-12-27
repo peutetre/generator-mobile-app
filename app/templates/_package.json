@@ -15,8 +15,7 @@
     "url": "git://github.com/<%= githubUser %>/<%= _.slugify(appName) %>.git"
   },<% } %>
   "scripts": {
-    "dev" : "echo TODO",
-    "build" : "echo TODO"
+    "postinstall" : "ln -s ./node_modules/cordova/bin/cordova ./cordova"
   },
   "dependencies": {
     "cordova" : "<%= pkg.dependencies.cordova %>"
