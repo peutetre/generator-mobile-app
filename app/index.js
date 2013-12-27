@@ -8,6 +8,7 @@ var util = require('util'),
     GitHubApi = require('github'),
     cordova = require('cordova'),
     chalk = require('chalk'),
+    Insight = require('insight'),
     Q = require('q');
 
 var prompts = require('./prompts');
@@ -21,6 +22,13 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
 
     this.seeds = [];
     this.pkg = JSON.parse(this.readFileAsString(packagePath));
+
+    this.insight = new Insight({
+        trackingCode : 'UA-15362034-3',
+        packageName : this.pkg.name,
+        packageVersion : this.pkg.version
+    });
+    this.insight.optOut = false;
 
     if(fs.existsSync(userSeedPath)) {
         this.seeds = JSON.parse(this.readFileAsString(userSeedPath));
@@ -62,15 +70,18 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
         this.seeds.forEach(function (seed) {
             console.log(chalk.blue(seed.name) + ": " + seed.path);
         }, this);
+        this.insight.track('options', 'list');
         process.exit(0);
     }
 
     if(options.gv || options['generator-version']) {
         console.log(this.pkg.version);
+        this.insight.track('options', 'version');
         process.exit(0);
     }
 
     this.on('end', function () {
+        this.insight.track('run', 'done');
         this.installDependencies({
             npm: true,
             bower: false
