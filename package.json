@@ -1,6 +1,6 @@
 {
   "name": "generator-mobile-app",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A Yeoman generator for mobile web apps with Cordova",
   "keywords": [
     "yeoman-generator",
@@ -24,12 +24,12 @@
     "clean": "rm -rf test/temp"
   },
   "dependencies": {
-    "yeoman-generator": "0.14.2",
+    "yeoman-generator": "0.15.0-pre.3",
     "github": "0.1.8",
     "q": "0.9.7",
     "cordova": "3.3.0-0.1.1",
     "chalk": "0.3.0",
-    "generator-default-seed": "peutetre/default-seed",
+    "generator-default-seed": "0.0.1",
     "recursive-merge": "1.2.0",
     "insight": "0.3.0"
   },

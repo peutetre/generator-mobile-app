@@ -50,14 +50,14 @@ __generator-mobile-app__ reads a .seeds.json file if available in your $HOME.
 [
     {
         "name" : "generator-browserify-seed",
-        "path" : "./code/generators/browserify-seed"
+        "path" : "./somewhere/generators/browserify-seed"
     }
 ]
 ```
 
 ## ChangeLog
 
-### v0.1 ???
+### v0.1.0 2013-12-30
 
 * working version (ios, android)
 

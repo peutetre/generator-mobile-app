@@ -84,7 +84,8 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
         this.insight.track('run', 'done');
         this.installDependencies({
             npm: true,
-            bower: false
+            bower: false,
+            skipInstall:true
         });
     });
 
@@ -217,7 +218,7 @@ MobileAppGenerator.prototype.cordovaplugins = function cordovaplugins() {
 
 MobileAppGenerator.prototype.execSeedGenerator = function oops() {
     var cb = this.async();
-    yeoman(this.seed.name, {
+    var gen = yeoman(this.seed.name, {
         userSettings : {
             appName : this.appName,
             githubUser : this.githubUser,
@@ -226,10 +227,12 @@ MobileAppGenerator.prototype.execSeedGenerator = function oops() {
             targets : this.targets,
             plugins : this.plugins
         }
-    }).register(this.seed.path, this.seed.name).run(function (err) {
+    }).register(this.seed.path, this.seed.name);
+
+    gen.run(function (err) {
         if (err) this.log.error(err).write();
         cb();
-    }.bind(this));
+    }.bind(gen));
 };
 
 MobileAppGenerator.prototype.app = function app() {

@@ -23,23 +23,22 @@ describe('mobile-app generator', function () {
     this.timeout(60000);
     var expected = [
       'package.json',
-      'app/index.js',
       'README.md',
       '.gitignore',
-      'style/styles.styl',
-      'www/index.html',
       'www/config.xml',
-      'platforms'
+      'platforms',
+      'plugins',
+      'merges'
     ];
 
     helpers.mockPrompt(this.app, {
-      'githubUser': 'peutetre',
       'appName': 'test-app',
       'appId': 'com.loops.test',
       'appDescription': 'This is a testing app',
-      'dependencies': 'q, zanimo',
       'targets': ['ios', 'android'],
-      'plugins': []
+      'plugins': ['org.apache.cordova.battery-status', 'org.apache.cordova.splashscreen'],
+      'repoOnGithub': false,
+      'seed': 'generator-default-seed'
     });
 
     this.app.run({}, function () {

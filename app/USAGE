@@ -1,2 +1,13 @@
 Description:
     Create a cordova app using a choosen project seed.
+
+    A default seed is included.
+
+    To add a seed create a ~/.seeds.json file and add your seed:
+
+        [
+            {
+                "name" : "my-project-seed",
+                "path" : "/local/path/to/my/project/seed"
+            }
+        ]
