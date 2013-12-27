@@ -25,15 +25,16 @@
   },
   "dependencies": {
     "yeoman-generator": "0.14.2",
-    "github": "~0.1.8",
+    "github": "0.1.8",
     "q": "0.9.7",
     "cordova": "3.3.0-0.1.1",
-    "chalk": "~0.3.0",
-    "generator-default-seed": "git://github.com/peutetre/default-seed",
-    "recursive-merge": "~1.2.0"
+    "chalk": "0.3.0",
+    "generator-default-seed": "peutetre/default-seed",
+    "recursive-merge": "1.2.0",
+    "insight": "0.3.0"
   },
   "devDependencies": {
-    "mocha": "~1.12.0"
+    "mocha": "1.12.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.6"
