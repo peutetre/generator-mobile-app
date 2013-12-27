@@ -109,7 +109,7 @@ MobileAppGenerator.prototype.askUserFor = function askFor() {
     var done = this.async();
 
     this.prompt(prompts.call(this), function (props) {
-        this.githubUser = props.githubUser;
+        this.githubUser = null;
         this.appName = props.appName;
         this.appId = props.appId;
         this.appDescription = props.appDescription;
@@ -125,12 +125,29 @@ MobileAppGenerator.prototype.askUserFor = function askFor() {
             console.log(chalk.red('you may need to install it: npm install -g ' + this.seed));
             process.exit(1);
         }
-        done();
+
+        if(props.repoOnGithub) {
+            this.prompt([{
+                type:'input',
+                name:'githubUser',
+                message:'What is your github username?',
+                default:null
+            }], function (val) {
+                this.githubUser = val.githubUser;
+                done();
+            }.bind(this));
+        }
+        else {
+            done();
+        }
+
     }.bind(this));
 };
 
 MobileAppGenerator.prototype.userInfo = function userInfo() {
     var done = this.async();
+
+    if (this.githubUser === null) done();
 
     githubUserInfo(this.githubUser, function (res, err) {
         if (err) {
@@ -213,10 +230,10 @@ MobileAppGenerator.prototype.generateMainPackageDotJSON = function cpPackage() {
                 jsonFromSeed = JSON.parse(this.readFileAsString(jsonSeedPath)),
                 jsonFromGenerator = JSON.parse(this.engine(this.read(jsonGeneratorPath, 'utf8'), this)),
                 mergedStr = JSON.stringify(merge(jsonFromGenerator, jsonFromSeed), null, 4);
-                fs.writeFile(path.join(process.cwd(), 'package.json'), mergedStr, function () {
-                    this.log.ok('merged package.json');
-                    done();
-                }.bind(this));
+            fs.writeFile(path.join(process.cwd(), 'package.json'), mergedStr, function () {
+                this.log.ok('merged package.json');
+                done();
+            }.bind(this));
         }
         else {
             this.template('_package.json', 'package.json');

@@ -4,12 +4,6 @@ module.exports = function () {
     return [
         {
             type:'input',
-            name:'githubUser',
-            message:'What is your github username?',
-            default:null
-        },
-        {
-            type:'input',
             name:'appName',
             message:'What is the name of the mobile App?',
             default: path.basename(process.cwd())
@@ -54,6 +48,12 @@ module.exports = function () {
             name:'seed',
             choices: this.seeds.map(function (seed) { return seed.name ; }),
             message:'With which project seed do you want to start with?'
+        },
+        {
+            type:'confirm',
+            name:'repoOnGithub',
+            message:'Is your repository on github?',
+            default:false
         }
     ];
 };
