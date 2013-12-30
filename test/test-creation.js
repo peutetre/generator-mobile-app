@@ -35,7 +35,7 @@ describe('mobile-app generator', function () {
       'appName': 'test-app',
       'appId': 'com.loops.test',
       'appDescription': 'This is a testing app',
-      'targets': ['ios', 'android'],
+      'targets': ['android'],
       'plugins': ['org.apache.cordova.battery-status', 'org.apache.cordova.splashscreen'],
       'repoOnGithub': false,
       'seed': 'generator-default-seed'
