@@ -17,6 +17,8 @@ $ npm install -g yo generator-mobile-app
 
 ### Usage
 
+![cli-usage][http://42loops.com/yo-mobile-app.gif]
+
 Launch the generator (interactive mode):
 
 ```
