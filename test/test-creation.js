@@ -35,7 +35,7 @@ describe('mobile-app generator', function () {
       'appName': 'test-app',
       'appId': 'com.loops.test',
       'appDescription': 'This is a testing app',
-      'targets': ['android'],
+      'targets': ['ios'],
       'plugins': [],
       'repoOnGithub': false,
       'seed': 'generator-default-seed'
