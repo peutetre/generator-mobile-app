@@ -39,7 +39,7 @@ $ yo mobile-app -h
 ## Seeds
 
 * __[default-seed](http://github.com/peutetre/default-seed)__
-* __[browserify-seed](http://github.com/peutetre/browserify-seed)__
+* __[browserify-seed](http://github.com/peutetre/generator-browserify-seed)__
 
 ## Add more seeds
 
