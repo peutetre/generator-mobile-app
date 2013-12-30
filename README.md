@@ -1,6 +1,11 @@
 # generator-mobile-app [![experimental](http://hughsk.github.io/stability-badges/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
 
-A __[Yeoman](http://yeoman.io)__ generator for mobile web apps using __[Cordova](http://cordova.apache.org/)__ supporting iOS and android. (macosx only...)
+A __[Yeoman](http://yeoman.io)__ generator for mobile web apps using __[Cordova](http://cordova.apache.org/)__ supporting iOS and Android. (macosx only...)
+
+## Requirements
+
+* [Android SDK](http://developer.android.com/)
+* [iOS SDK](http://developer.apple.com/)
 
 ## Getting Started
 
