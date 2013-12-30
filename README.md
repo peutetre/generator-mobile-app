@@ -1,4 +1,4 @@
-# generator-mobile-app [![Build Status](https://secure.travis-ci.org/peutetre/generator-mobile-app.png?branch=master)](https://travis-ci.org/peutetre/generator-mobile-app) [![experimental](http://hughsk.github.io/stability-badges/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
+# generator-mobile-app [![experimental](http://hughsk.github.io/stability-badges/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
 
 A __[Yeoman](http://yeoman.io)__ generator for mobile web apps using __[Cordova](http://cordova.apache.org/)__.
 
