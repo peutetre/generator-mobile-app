@@ -177,7 +177,7 @@ MobileAppGenerator.prototype.initCordova = function initCordova() {
 
     cordova.create('.', this.appId, this.appName, cfg, function (err) {
         if(err) {
-            console.log(chalk.red('Oops something went wrong...'));
+            console.log(chalk.red('Error in cordova app init'));
             console.log(err);
             process.exit(1);
         }
@@ -191,7 +191,7 @@ MobileAppGenerator.prototype.target = function target() {
 
     cordova.platform('add', this.targets, function (err) {
         if(err) {
-            console.log(chalk.red('Oops something went wrong...'));
+            console.log(chalk.red('Error in cordova add targets'));
             console.log(err);
             process.exit(2);
         }
@@ -205,7 +205,7 @@ MobileAppGenerator.prototype.cordovaplugins = function cordovaplugins() {
 
     cordova.plugins('add', this.plugins, function (err) {
         if(err) {
-            console.log(chalk.red('Oops something went wrong...'));
+            console.log(chalk.red('Error in cordova add plugins'));
             console.log(err);
             process.exit(4);
         }
