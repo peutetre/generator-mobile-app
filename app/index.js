@@ -284,7 +284,7 @@ MobileAppGenerator.prototype.generateMainPackageDotJSON = function cpPackage() {
         }
         else {
             this.template('_package.json', 'package.json');
+            done();
         }
-        done();
     }.bind(this));
 };

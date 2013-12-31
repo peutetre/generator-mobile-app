@@ -70,6 +70,10 @@ __generator-mobile-app__ reads a .seeds.json file if available in your $HOME.
 
 ## ChangeLog
 
+### v0.1.2 2013-12-31
+
+* fix async() call in package.json merge fn
+
 ### v0.1.1 2013-12-31
 
 * add long list option
