@@ -25,7 +25,7 @@
     "q": "0.9.7",
     "cordova": "3.3.1-0.1.2",
     "chalk": "0.3.0",
-    "generator-default-seed": "0.0.1",
+    "generator-default-seed": "0.0.2",
     "recursive-merge": "1.2.0",
     "insight": "0.3.0"
   },

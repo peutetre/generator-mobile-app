@@ -70,6 +70,11 @@ __generator-mobile-app__ reads a .seeds.json file if available in your $HOME.
 
 ## ChangeLog
 
+### v0.1.1 2013-12-31
+
+* add long list option
+* update generator default seed to 0.0.2
+
 ### v0.1.0 2013-12-30
 
 * working version (ios, android)
