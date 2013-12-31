@@ -33,20 +33,28 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
     if(fs.existsSync(userSeedPath)) {
         this.seeds = JSON.parse(this.readFileAsString(userSeedPath));
         this.seeds = this.seeds.map(function (seed) {
+            var p = path.resolve(process.env.HOME, seed.path),
+                pkg = JSON.parse(this.readFileAsString(path.join(p, 'package.json')));
             return {
                 name : seed.name,
-                path : path.resolve(process.env.HOME, seed.path)
+                path : p,
+                version : pkg.version,
+                description : pkg.description
             };
-        });
+        }.bind(this));
     }
 
     var defaultSeeds = JSON.parse(this.readFileAsString(generatorSeedPath))
             .map(function (seed) {
+                var p = path.resolve(__dirname, seed.path),
+                    pkg = JSON.parse(this.readFileAsString(path.join(p, 'package.json')));
                 return {
                     name : seed.name,
-                    path : path.resolve(__dirname, seed.path)
+                    path : p,
+                    version : pkg.version,
+                    description : pkg.description
                 };
-            });
+            }.bind(this));
 
     this.seeds = this.seeds.concat(defaultSeeds);
 
@@ -66,11 +74,30 @@ var MobileAppGenerator = module.exports = function MobileAppGenerator(args, opti
         defaults: false
     });
 
-    if(options.l || options.list) {
+    this.option('long-list', {
+        alias: 'll',
+        desc: 'List available seeds with path',
+        required: 'false',
+        type: Boolean,
+        defaults: false
+    });
+
+    if(options.l || options['list']) {
         this.seeds.forEach(function (seed) {
-            console.log(chalk.blue(seed.name) + ": " + seed.path);
+            console.log(seed.name + ' v' + seed.version);
         }, this);
         this.insight.track('options', 'list');
+        process.exit(0);
+    }
+
+    if(options.ll || options['long-list']) {
+        this.seeds.forEach(function (seed) {
+            console.log(chalk.blue.bold(seed.name) + ' v' + seed.version);
+            console.log('  path: ' + chalk.gray(seed.path));
+            console.log('  ' + seed.description);
+            console.log();
+        }, this);
+        this.insight.track('options', 'long-list');
         process.exit(0);
     }
 

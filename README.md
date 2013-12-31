@@ -37,6 +37,12 @@ Get the available project seeds
 $ yo mobile-app -l
 ```
 
+and more details with
+
+```
+$ yo mobile-app -ll
+```
+
 Get some help
 
 ```
