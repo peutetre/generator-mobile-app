@@ -70,6 +70,10 @@ __generator-mobile-app__ reads a .seeds.json file if available in your $HOME.
 
 ## ChangeLog
 
+### v0.1.3 2014-01-10
+
+* upgrade generator-default-seed dependency to 0.0.3
+
 ### v0.1.2 2013-12-31
 
 * fix async() call in package.json merge fn
