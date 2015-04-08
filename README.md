@@ -2,7 +2,7 @@
 
 A __[Yeoman](http://yeoman.io)__ generator for mobile web apps using __[Cordova](http://cordova.apache.org/)__ supporting iOS and Android. (macosx only...)
 
-## Deprecated, see [tarifa ![tarifa](https://raw.githubusercontent.com/TarifaTools/tarifa/master/template/assets/logo.png)](http://tarifa.tools)
+## Deprecated, see [tarifa ![tarifa](http://tarifa.tools/images/tarifa.png)](http://tarifa.tools)
 
 ## Requirements
 
