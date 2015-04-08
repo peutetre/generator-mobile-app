@@ -1,6 +1,8 @@
-# generator-mobile-app [![experimental](http://hughsk.github.io/stability-badges/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
+# generator-mobile-app [![deprecated](http://badges.github.io/stability-badges/dist/deprecated.svg)](http://github.com/badges/stability-badges)
 
 A __[Yeoman](http://yeoman.io)__ generator for mobile web apps using __[Cordova](http://cordova.apache.org/)__ supporting iOS and Android. (macosx only...)
+
+## Deprecated, see [tarifa ![tarifa](https://raw.githubusercontent.com/TarifaTools/tarifa/master/template/assets/logo.png)](http://tarifa.tools)
 
 ## Requirements
 
